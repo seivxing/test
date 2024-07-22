@@ -106,7 +106,53 @@
                     {{-- <a href="{{ route('home') }}" class="text-black"><span class="text-primary">BTB PC</a> --}}
                 </div>
 
+                <div class="col-12">
+                    <nav class="site-navigation text-right ml-auto " role="navigation">
 
+                        <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
+                            <li><a href="{{ route('home') }}" class="nav-link active">Home</a></li>
+
+
+
+                            <li class="has-children">
+                                <a href="#" class="nav-link">Brand</a>
+                                <ul class="dropdown arrow-top">
+                                    @foreach ($productbrands as $productbrand)
+                                        {{-- <li><a href="" class="nav-link"></a></li> --}}
+                                        <li>
+                                            <a class="nav-link" style="cursor: pointer"
+                                                wire:click="redirectToproductbrand({{ $productbrand->id }})"value="{{ $productbrand->id }}">{{ $productbrand->brand }}</a>
+                                        </li>
+                                    @endforeach
+
+                                </ul>
+                            </li>
+
+                            {{-- GUEST --}}
+                            @guest
+                                @if (Route::has('login'))
+                                    <li><a href="{{ route('login') }}" class="nav-link">Login</a></li>
+                                @endif
+                                @if (Route::has('register'))
+                                    <li><a href="{{ route('register') }}" class="nav-link">Register</a></li>
+                                @endif
+                            @endguest
+
+                            @auth
+                                <li><a class="nav-link" href="{{ route('tracking_product') }}"><i
+                                            class="fas fa-truck"></i> Tracking (@livewire('pages.user.producttracking.product-tracking-count'))</a></li>
+                                <li><a class="nav-link" href="{{ route('view_productcart') }}"><i
+                                    class="fas fa-shopping-cart"></i> Cart (@livewire('pages.user.productcart.product-cart-count'))</a></li>
+                                <li><a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                                </li>
+                            @endauth
+                        </ul>
+
+                    </nav>
+
+
+
+                </div>
                 <div class="toggle-button d-inline-block d-lg-none"><a href="#"
                         class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a>
                 </div>
