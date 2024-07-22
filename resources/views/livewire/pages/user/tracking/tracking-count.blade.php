@@ -1,3 +1,3 @@
-<div wire:poll class="d-inline">
+{{-- <div wire:poll class="d-inline">
     {{ $orderCount }}
-</div>
+</div> --}}
